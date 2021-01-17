@@ -1,9 +1,10 @@
 # state-machine
 a state machine that can change difference backends
 
-# test
+# test and contribute
 ```
-cd tests
+git clone git@github.com:ramwin/state-machine
 pip3 install -e ./
+cd tests
 python3 __init__.py
 ```
