@@ -30,11 +30,13 @@ class RedisBackend(BaseBackend):
         self.con.setnx(state_key, default)
         self.con.expire(state_key, self.timeout)
         latest_state = self.get_remote_state(backend_key)
-        if latest_state == default:
+        if latest_state != default:
             self.expired(your_state=default, remote_state=latest_state)
+        return latest_state
 
     def get_remote_state(self, backend_key):
-        return self.con.get(backend_key)
+        state_key = f"state_machine:state:{backend_key}"
+        return self.con.get(state_key)
 
     def change_state(self, backend_key, from_state, to_state):
         """
@@ -46,8 +48,9 @@ class RedisBackend(BaseBackend):
         lock = self.con.lock(lock_key)
         if not lock.acquire(blocking=False):
             return self.block()
-        if self.get_state(backend_key, from_state) != from_state:
-            return self.expired()
+        remote_state = self.get_state(backend_key, from_state)
+        if remote_state != from_state:
+            return self.expired(your_state=from_state, remote_state=remote_state)
         self.con.set(state_key, to_state)
         lock.release()
         return True

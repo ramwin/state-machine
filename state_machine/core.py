@@ -48,7 +48,9 @@ class StateMachine(metaclass=StateMachineMetaClass):
 
     @state.setter
     def state(self, value):
-        return self.backend.change_state(f"{self.backend_key}", from_state=self._state, to_state=value)
+        self.backend.change_state(f"{self.backend_key}", from_state=self._state, to_state=value)
+        self._state = value
+        return self._state
 
     @property
     def backend_key(self):

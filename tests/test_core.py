@@ -8,6 +8,7 @@ from redis import Redis
 from log import log
 
 from state_machine import StateMachine, State, Event, RedisBackend
+from state_machine.exceptions import StateChangedException, StateUnexcepedException
 
 
 log.info("run test_core")
@@ -33,7 +34,19 @@ class TestCore(unittest.TestCase):
         job1_0 = Job(jobid=1, state="NEW")
         job1_1 = Job(jobid=1, state="NEW")
         job1_0.state = "STARTED"
-        self.assertEqual(job1_1.state, "STARTED")
+        log.info("the state has changed by job1_o")
+        with self.assertRaises(StateChangedException):
+            log.info("so an error will be raised if you run job1_1.state")
+            job1_1.state
+        log.info("yes it is")
+        job1_2 = Job(jobid=1, state="STARTED")
+        job1_2.state = "NEW"
+        log.info("the state has changed back by job1_2")
+        log.info("so the job1_1.state will run successfully")
+        log.info(f"job1_1.state: {job1_1.state}")
+        with self.assertRaises(StateChangedException):
+            log.info("the job1_0.state will fail")
+            job1_0.state
 
 
 if __name__ == "__main__":
