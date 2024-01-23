@@ -3,20 +3,29 @@
 # Xiang Wang @ 2021-01-16 10:57:45
 
 
-class BaseException(Exception):
-    pass
+# pylint:disable=missing-class-docstring
+
+"""
+all exceptions
+"""
 
 
-class StateChangedException(BaseException):
+class StateMachineBaseException(Exception):
+    """
+    all exception show inherit the StateMachineBaseException
+    """
+
+
+class StateChangedException(StateMachineBaseException):
 
     message = "state diff from current state"
 
 
-class StateChangingException(BaseException):
+class StateChangingException(StateMachineBaseException):
 
     message = "the obj's state is changing by other process"
 
 
-class StateUnexcepedException(BaseException):
+class StateUnexcepedException(StateMachineBaseException):
 
     message = "your state not in from_states"
