@@ -11,7 +11,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name = "state-machine-2",
-    version = "0.2.0",
+    version = "0.2.1",
     author="Xiang Wang",
     author_email="ramwin@qq.com",
     description="a state machine that support multi process",
@@ -26,4 +26,7 @@ setuptools.setup(
         "redis",
     ],
     python_requires=">=3.7",
+    package_data=[
+        "state_machine/py.typed",
+    ]
 )
