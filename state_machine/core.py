@@ -6,7 +6,7 @@
 import logging
 
 from . import exceptions
-from .backends import RedisBackend
+from .backends import BaseBackend, RedisBackend
 from .base import Event
 
 
@@ -32,7 +32,7 @@ class StateMachineMetaClass(type):
 
 
 class StateMachine(metaclass=StateMachineMetaClass):
-    backend = None
+    backend: BaseBackend
     _state = None
     state_key = "state"
 

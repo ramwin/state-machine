@@ -3,14 +3,17 @@
 # Xiang Wang @ 2021-01-16 10:32:22
 
 
+import logging
 import unittest
 from redis import Redis
-from log import log
 
 from state_machine import StateMachine, State, Event, RedisBackend
 from state_machine.exceptions import StateChangedException, StateUnexcepedException
 
+from . import log  # pylint: disable=unused-import
 
+
+log = logging.getLogger(__name__)
 log.info("run test_core")
 con = Redis(decode_responses=True)
 con.flushall()

@@ -5,7 +5,7 @@
 
 import unittest
 
-from test_core import TestCore
+from .test_core import TestCore
 
 
 if __name__ == "__main__":

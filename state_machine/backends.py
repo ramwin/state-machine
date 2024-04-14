@@ -38,7 +38,7 @@ class RedisBackend(BaseBackend):
         state_key = f"state_machine:state:{backend_key}"
         return self.con.get(state_key)
 
-    def change_state(self, backend_key, from_state, to_state):
+    def change_state(self, backend_key, from_state, to_state) -> bool:
         """
         return True if success
         raise Exception if fail
