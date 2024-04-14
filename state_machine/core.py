@@ -32,6 +32,9 @@ class StateMachineMetaClass(type):
 
 
 class StateMachine(metaclass=StateMachineMetaClass):
+    """
+    A StateMachine can safely change the state of an object without worrying changed by other process
+    """
     backend: BaseBackend
     _state = None
     state_key = "state"

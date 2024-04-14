@@ -7,7 +7,7 @@ and keep state synchronously in different state even different host.
 sudo pip3 install state-machine-2
 ```
 
-# Usage
+# Quick Start
 1. Create a State Backend
 ```
 from state_machine import StateMachine, RedisBackend
@@ -42,7 +42,7 @@ Error: StateChangedException() # raise Exception because the state has changed b
 # test and contribute
 ```
 git clone git@github.com:ramwin/state-machine.git
+cd state-machine
 pip3 install -e ./
-cd tests
-python3 __init__.py
+sh test.sh
 ```

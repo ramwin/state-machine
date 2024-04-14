@@ -29,6 +29,7 @@ def change_items_state(
             item.state = target_state
         except StateMachineBaseException:
             has_error = True
+            # del origin_state[item.backend_key]
             break
     if has_error:
         for item in items:
