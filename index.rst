@@ -37,3 +37,10 @@ backend
 .. automodule:: state_machine.backends
    :members:
    :private-members:
+
+utils
+-----
+
+.. automodule:: state_machine.utils
+   :members:
+   :private-members:
