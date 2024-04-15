@@ -1,4 +1,5 @@
 # state-machine
+[documentation](https://state-machine.readthedocs.io/en/latest/)  
 a state machine that can change difference backends (current only redis backend, lately the filelockbackend)  
 and keep state synchronously in different state even different host.
 
