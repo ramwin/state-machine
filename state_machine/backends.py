@@ -45,7 +45,7 @@ class RedisBackend(BaseBackend):
         """
         lock_key = f"state_machine:lock:{backend_key}"
         state_key = f"state_machine:state:{backend_key}"
-        lock = self.con.lock(lock_key)
+        lock = self.con.lock(lock_key, timeout=10)
         if not lock.acquire(blocking=False):
             return self.block()
         remote_state = self.get_state(backend_key, from_state)
