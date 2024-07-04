@@ -50,6 +50,7 @@ class RedisBackend(BaseBackend):
             return self.block()
         remote_state = self.get_state(backend_key, from_state)
         if remote_state != from_state:
+            lock.release()
             return self.expired(your_state=from_state, remote_state=remote_state)
         self.con.set(state_key, to_state)
         lock.release()
